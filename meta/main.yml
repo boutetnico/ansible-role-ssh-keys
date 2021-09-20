@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: ssh-keys
+  role_name: ssh_keys
   namespace: boutetnico
   author: Nicolas Boutet
   description: Install SSH keys.
