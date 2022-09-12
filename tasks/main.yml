@@ -1,12 +1,12 @@
 ---
 - name: Install dependencies
-  apt:
+  ansible.builtin.apt:
     name: "{{ ssh_keys_dependencies }}"
     state: present
     update_cache: true
 
 - name: Install authorized keys
-  authorized_key:
+  ansible.posix.authorized_key:
     key: "{{ lookup('file', item.src) }}"
     state: present
     user: "{{ item.user }}"
@@ -15,7 +15,7 @@
     label: "{{ item.user }}"
 
 - name: Install known hosts
-  known_hosts:
+  ansible.builtin.known_hosts:
     hash_host: "{{ item.hash_host | d(omit) }}"
     key: "{{ item.name }} {{ item.type }} {{ item.key }}"
     name: "{{ item.name }}"
@@ -26,7 +26,7 @@
     label: "{{ item.name }}"
 
 - name: Install private keys
-  copy:
+  ansible.builtin.copy:
     dest: "{{ item.dest }}"
     group: "{{ item.group }}"
     mode: 0600
@@ -37,7 +37,7 @@
     label: "{{ item.dest }}"
 
 - name: Install public keys
-  copy:
+  ansible.builtin.copy:
     dest: "{{ item.dest }}"
     group: "{{ item.group }}"
     mode: 0644
