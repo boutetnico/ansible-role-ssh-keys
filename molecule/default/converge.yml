@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   roles:
-    - role: ansible-role-ssh-keys
+    - role: boutetnico.ssh_keys
 
       ssh_keys_authorized_keys:
         - user: root
