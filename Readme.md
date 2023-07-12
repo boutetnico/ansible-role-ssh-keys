@@ -1,5 +1,5 @@
 [![tests](https://github.com/boutetnico/ansible-role-ssh-keys/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-ssh-keys/actions?query=workflow%3A%22Test+ansible+role%22)
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.ssh-keys-blue.svg)](https://galaxy.ansible.com/boutetnico/ssh-keys)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.ssh_keys-blue.svg)](https://galaxy.ansible.com/boutetnico/ssh_keys)
 
 
 ansible-role-ssh-keys
