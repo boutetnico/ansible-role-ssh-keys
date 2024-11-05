@@ -14,6 +14,15 @@
   loop_control:
     label: "{{ item.user }}"
 
+- name: Ensure .ssh directory exists
+  ansible.builtin.file:
+    mode: "0700"
+    path: "{{ item }}"
+    state: directory
+  loop: "{{ ssh_keys_known_hosts | selectattr('path', 'defined') | map(attribute='path') | map('dirname') | unique | list }}"
+  loop_control:
+    label: "{{ item }}"
+
 - name: Install known hosts
   ansible.builtin.known_hosts:
     hash_host: "{{ item.hash_host | d(omit) }}"
@@ -24,6 +33,15 @@
   loop: "{{ ssh_keys_known_hosts }}"
   loop_control:
     label: "{{ item.name }}"
+
+- name: Ensure directory for keys exist
+  ansible.builtin.file:
+    mode: "0700"
+    path: "{{ item }}"
+    state: directory
+  loop: "{{ (ssh_keys_private_keys + ssh_keys_public_keys) | map(attribute='dest') | map('dirname') | unique | list }}"
+  loop_control:
+    label: "{{ item }}"
 
 - name: Install private keys
   ansible.builtin.copy:
