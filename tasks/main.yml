@@ -37,11 +37,13 @@
 - name: Ensure directory for keys exist
   ansible.builtin.file:
     mode: "0700"
-    path: "{{ item }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    path: "{{ item.dest | dirname }}"
     state: directory
-  loop: "{{ (ssh_keys_private_keys + ssh_keys_public_keys) | map(attribute='dest') | map('dirname') | unique | list }}"
+  loop: "{{ ssh_keys_private_keys + ssh_keys_public_keys }}"
   loop_control:
-    label: "{{ item }}"
+    label: "{{ item.dest | dirname }}"
 
 - name: Install private keys
   ansible.builtin.copy:

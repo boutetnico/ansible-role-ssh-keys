@@ -1,6 +1,13 @@
 ---
 - name: Converge
   hosts: all
+  tasks:
+    - name: Create test user
+      ansible.builtin.user:
+        name: testuser
+        group: users
+        create_home: true
+
   roles:
     - role: boutetnico.ssh_keys
 
@@ -25,9 +32,17 @@
           group: root
           src: files/id_rsa_deploy
           dest: /root/.ssh/id_rsa_deploy
+        - owner: testuser
+          group: users
+          src: files/id_rsa_deploy
+          dest: /home/testuser/.ssh/id_rsa_testuser
 
       ssh_keys_public_keys:
         - owner: root
           group: root
           src: files/id_rsa_deploy.pub
           dest: /root/.ssh/id_rsa_deploy.pub
+        - owner: testuser
+          group: users
+          src: files/id_rsa_deploy.pub
+          dest: /home/testuser/.ssh/id_rsa_testuser.pub
