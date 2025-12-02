@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
+  pre_tasks:
     - name: Create test user
       ansible.builtin.user:
         name: testuser
