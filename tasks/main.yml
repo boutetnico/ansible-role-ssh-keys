@@ -55,6 +55,7 @@
   loop: "{{ ssh_keys_private_keys }}"
   loop_control:
     label: "{{ item.dest }}"
+  no_log: true
 
 - name: Install public keys
   ansible.builtin.copy:
