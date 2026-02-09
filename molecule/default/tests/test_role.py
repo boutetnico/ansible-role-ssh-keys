@@ -4,6 +4,17 @@ import os
 
 
 @pytest.mark.parametrize(
+    "package",
+    [
+        "openssh-client",
+    ],
+)
+def test_dependencies_installed(host, package):
+    pkg = host.package(package)
+    assert pkg.is_installed
+
+
+@pytest.mark.parametrize(
     "username,groupname,path,key",
     [
         (
